@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/complete"
+            android:icon="@mipmap/documents"
+            android:title="Completar Formularios" />
+
+
+        <item
+            android:id="@+id/account"
+            android:icon="@mipmap/user"
+            android:title="Mi cuenta" />
+    </group>
+
+    <item android:title="Administrador">
+        <menu>
+            <item
+                android:id="@+id/AnsweredForms"
+                android:icon="@mipmap/ready"
+                android:title="Formularios Hechos" />
+            <item
+                android:id="@+id/EditForms"
+                android:icon="@mipmap/edit"
+                android:title="Editar Formularios" />
+        </menu>
+    </item>
+
+</menu>
