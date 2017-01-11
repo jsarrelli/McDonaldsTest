@@ -5,22 +5,14 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
-import com.example.julisarrelli.mcdonaldstest.JavaClases.Local;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.User;
 
@@ -35,10 +27,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import static com.example.julisarrelli.mcdonaldstest.R.id.listView;
-import static com.example.julisarrelli.mcdonaldstest.R.id.text;
-
-public class Loggin extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
 
     // Progress Dialog
@@ -60,6 +49,7 @@ public class Loggin extends AppCompatActivity {
     private static final String TAG_ID = "iduser";
     private static final String TAG_USERNAME = "username";
     private static final String TAG_PASS = "pass";
+    private static final String TAG_TYPE = "type";
 
 
     // products JSONArray
@@ -108,7 +98,7 @@ public class Loggin extends AppCompatActivity {
         @Override
 //       Override protected void onPreExecute() {
 //            super.onPreExecute();
-//            pDialog = new ProgressDialog(Loggin.this);
+//            pDialog = new ProgressDialog(Login.this);
 //            pDialog.setMessage("Inicializando...");
 //            pDialog.setIndeterminate(false);
 //            pDialog.setCancelable(false);
@@ -144,12 +134,13 @@ public class Loggin extends AppCompatActivity {
                         String id = c.getString(TAG_ID);
                         String username = c.getString(TAG_USERNAME);
                         String pass = c.getString(TAG_PASS);
+                        String type = c.getString(TAG_TYPE);
 
                         //obtenemos todos los usuarios en la base y los cargamos en el hashmap,
                         //si la base llegase a tener muchos usuarios esto no es conveniente
                         //ya que le demanda mucho al procesador del telefono
 
-                        User user=new User(username,pass);
+                        User user=new User(username,pass,type);
                         platform.addUser(Integer.parseInt(id),user);
 
 
@@ -171,7 +162,7 @@ public class Loggin extends AppCompatActivity {
 
         String username=usernameText.getText().toString();
         String pass=passText.getText().toString();
-        User user=new User(username,pass);
+
 
 
 
@@ -181,9 +172,9 @@ public class Loggin extends AppCompatActivity {
         if (pass.isEmpty()) {
             passText.setError("Ingrese su clave");
         }
-        else if(platform.ValidateUser(user))
+        else if(platform.ValidateUser(username,pass))
         {
-            Intent intent = new Intent(Loggin.this, MainActivity.class);
+            Intent intent = new Intent(Login.this, MainActivity.class);
 
             startActivityForResult(intent, 0);
             finish();

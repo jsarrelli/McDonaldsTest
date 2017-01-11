@@ -66,13 +66,13 @@ public class Platform {
         return locals.get(idLocalToEvaluate).getAdress();
     }
 
-    public boolean ValidateUser(User user){
+    public boolean ValidateUser(String username,String pass){
 
         Set<Integer> keys=users.keySet();
 
         for(Integer key:keys)
         {
-            if((users.get(key).getUsername().equals(user.getUsername())&&(users.get(key).getPass().equals(user.getPass()))))
+            if((users.get(key).getUsername().equals(username)&&(users.get(key).getPass().equals(pass))))
             {
                 return true;
             }

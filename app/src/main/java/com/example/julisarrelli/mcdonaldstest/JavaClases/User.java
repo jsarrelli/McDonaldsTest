@@ -6,11 +6,13 @@ package com.example.julisarrelli.mcdonaldstest.JavaClases;
 public class User {
     private String username;
     private String pass;
+    private String type;
 
-    public User (String username,String pass)
+    public User (String username,String pass,String type)
     {
         this.username=username;
         this.pass=pass;
+        this.type=type;
     }
 
     public String getPass() {
@@ -22,5 +24,10 @@ public class User {
         return username;
     }
 
+
+    public String getType() {
+
+        return type;
+    }
 
 }
