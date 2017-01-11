@@ -23,18 +23,24 @@ import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    Platform platform=Platform.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-
-
+        setSupportActionBar(toolbar);
 
 
         //instanciamos la plataforma en donde vamos a guardar las cosas extraidas de la base de datos
-        Platform platform=Platform.getInstance();
+
+
+        if(!platform.isUservalidated()){
+
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivityForResult(intent, 0);
+            finish();
+        }
 
 
         //se instancia el navigation Drawer
@@ -71,9 +77,8 @@ public class MainActivity extends AppCompatActivity
                     {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
+                            platform.setUservalidated(false);
                             finish();
-
                         }
 
                     })

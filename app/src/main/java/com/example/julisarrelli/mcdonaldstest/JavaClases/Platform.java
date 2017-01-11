@@ -15,6 +15,7 @@ public class Platform {
     public static HashMap<Integer,User>users;
     public static int idLocalToEvaluate ;
     public static int idFormToComplete;
+    public static boolean uservalidated;
 
 
     public static Platform instance=null;
@@ -25,6 +26,7 @@ public class Platform {
             forms=new HashMap<Integer, Form>();
             locals=new HashMap<Integer, Local>();
             users=new HashMap<Integer, User>();
+            uservalidated=false;
 
         }
 
@@ -66,7 +68,15 @@ public class Platform {
         return locals.get(idLocalToEvaluate).getAdress();
     }
 
-    public boolean ValidateUser(String username,String pass){
+    public static void setUservalidated(boolean uservalidated) {
+        Platform.uservalidated = uservalidated;
+    }
+
+    public static boolean isUservalidated() {
+        return uservalidated;
+    }
+
+    public boolean ValidateUser(String username, String pass){
 
         Set<Integer> keys=users.keySet();
 
@@ -74,6 +84,7 @@ public class Platform {
         {
             if((users.get(key).getUsername().equals(username)&&(users.get(key).getPass().equals(pass))))
             {
+                uservalidated=true;
                 return true;
             }
 
@@ -82,4 +93,6 @@ public class Platform {
         return false;
 
  }
+
+
 }

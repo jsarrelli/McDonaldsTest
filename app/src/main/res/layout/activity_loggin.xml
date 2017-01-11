@@ -9,12 +9,12 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
+        android:paddingTop="100dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         android:weightSum="1"
         android:background="#cc171515"
-        android:paddingBottom="250dp">
+        android:paddingBottom="210dp">
 
         <ImageView android:src="@mipmap/mcdonalds"
             android:layout_width="wrap_content"
@@ -32,7 +32,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:hint="Username" />
+                android:hint="Username"
+                 />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->

@@ -167,10 +167,12 @@ public class Login extends AppCompatActivity {
 
 
         if (username.isEmpty()) {
+            usernameText.requestFocus();
             usernameText.setError("Ingrese un usuario");
         }
-        if (pass.isEmpty()) {
-            passText.setError("Ingrese su clave");
+         if (pass.isEmpty()) {
+             passText.requestFocus();
+            passText.setError("Ingrese su passs");
         }
         else if(platform.ValidateUser(username,pass))
         {
