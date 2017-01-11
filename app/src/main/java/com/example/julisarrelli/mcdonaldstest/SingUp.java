@@ -1,19 +1,16 @@
 
 package com.example.julisarrelli.mcdonaldstest;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.Toast;
 
-import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 
 
@@ -79,9 +76,7 @@ public class SingUp extends AppCompatActivity {
         String username = usernameText.getText().toString();
         String pass = passText.getText().toString();
         String repeatPassword = repeatPasswordText.getText().toString();
-        Log.v("pass",username);
-        Log.v("pass",pass);
-        Log.v("pass",repeatPassword);
+
         if (username.isEmpty()) {
             usernameText.requestFocus();
             usernameText.setError("Ingrese un usuario");

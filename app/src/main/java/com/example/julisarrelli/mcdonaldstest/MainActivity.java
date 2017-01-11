@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -34,6 +35,12 @@ public class MainActivity extends AppCompatActivity
 
         //instanciamos la plataforma en donde vamos a guardar las cosas extraidas de la base de datos
 
+        if(platform.isUservalidated()) {
+            if (platform.loggedUser.getType().equals("classic")) {
+                hideItems();
+
+            }
+        }
 
         if(!platform.isUservalidated()){
 
@@ -41,6 +48,7 @@ public class MainActivity extends AppCompatActivity
             startActivityForResult(intent, 0);
             finish();
         }
+
 
 
         //se instancia el navigation Drawer
@@ -60,6 +68,14 @@ public class MainActivity extends AppCompatActivity
                 startActivityForResult(intent, 0);
             }
         });
+    }
+
+    private void hideItems() {
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu nav_Menu = navigationView.getMenu();
+
+        nav_Menu.findItem(R.id.administrator).setVisible(false);
     }
 
 

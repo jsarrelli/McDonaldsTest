@@ -14,7 +14,8 @@
             android:title="Mi cuenta" />
     </group>
 
-    <item android:title="Administrador">
+    <item android:title="Administrador"
+        android:id="@+id/administrator">
         <menu>
             <item
                 android:id="@+id/AnsweredForms"
