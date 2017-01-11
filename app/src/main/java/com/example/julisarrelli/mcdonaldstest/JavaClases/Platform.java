@@ -16,6 +16,7 @@ public class Platform {
     public static int idLocalToEvaluate ;
     public static int idFormToComplete;
     public static boolean uservalidated;
+    public static User loggedUser;
 
 
     public static Platform instance=null;
@@ -27,6 +28,7 @@ public class Platform {
             locals=new HashMap<Integer, Local>();
             users=new HashMap<Integer, User>();
             uservalidated=false;
+            loggedUser=null;
 
         }
 
@@ -76,6 +78,14 @@ public class Platform {
         return uservalidated;
     }
 
+    public static User getLoggedUser() {
+        return loggedUser;
+    }
+
+    public static void setLoggedUser(User loggedUser) {
+        Platform.loggedUser = loggedUser;
+    }
+
     public boolean ValidateUser(String username, String pass){
 
         Set<Integer> keys=users.keySet();
@@ -85,7 +95,9 @@ public class Platform {
             if((users.get(key).getUsername().equals(username)&&(users.get(key).getPass().equals(pass))))
             {
                 uservalidated=true;
+                loggedUser=users.get(key);
                 return true;
+
             }
 
         }
@@ -93,6 +105,29 @@ public class Platform {
         return false;
 
  }
+
+    public boolean cheackUsername(String username)
+    {
+        Set<Integer> keys=users.keySet();
+
+        for(Integer key:keys)
+        {
+            if((users.get(key).getUsername().equals(username)))
+            {
+                return true;
+
+            }
+
+        }
+
+        return false;
+    }
+
+
+    public int lastUserId()
+    {
+        return users.size()-1;
+    }
 
 
 }

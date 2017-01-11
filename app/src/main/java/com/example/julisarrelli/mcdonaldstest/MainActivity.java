@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             platform.setUservalidated(false);
+                            platform.setLoggedUser(null);
                             finish();
                         }
 
@@ -124,6 +125,26 @@ public class MainActivity extends AppCompatActivity
             startActivityForResult(intent, 0);
 
         } else if (id == R.id.account) {
+
+
+                new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Mi cuenta")
+                        .setMessage("Usuario actual: "+platform.getLoggedUser().getUsername())
+                        .setPositiveButton("Aceptar",null)
+                        .setNegativeButton("Log out", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which) {
+                                platform.setUservalidated(false);
+                                platform.setLoggedUser(null);
+                                Intent intent = new Intent(MainActivity.this, Login.class);
+                                startActivityForResult(intent, 0);
+                                finish();
+                            }
+                        })
+                        .show();
+
+
 
         } else if (id == R.id.AnsweredForms) {
 

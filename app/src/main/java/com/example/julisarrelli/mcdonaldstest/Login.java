@@ -9,7 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
@@ -21,7 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -37,7 +38,7 @@ public class Login extends AppCompatActivity {
     JSONParser jParser = new JSONParser();
     Platform platform=Platform.getInstance();
 
-    ArrayList<HashMap<String, String>> usersList;
+
 
 
     // url to get all products list
@@ -55,7 +56,7 @@ public class Login extends AppCompatActivity {
     // products JSONArray
     JSONArray products = null;
 
-    ListView list;
+
 
 
 
@@ -70,7 +71,7 @@ public class Login extends AppCompatActivity {
 
         ButterKnife.inject(this);
         // Hashmap para el ListView
-        usersList= new ArrayList<HashMap<String, String>>();
+
 
         // Cargar los productos en el Background Thread
         new LoadAllUsers().execute();
@@ -84,7 +85,15 @@ public class Login extends AppCompatActivity {
         });
 
 
+        final TextView singup = (TextView) findViewById(R.id.link_signup);
+        singup.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this, SingUp.class);
 
+                startActivityForResult(intent, 0);
+                finish();
+            }
+        });
 
 
     }

@@ -25,7 +25,8 @@
             android:label="Listado de Formularios"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ListedLocals" />
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
+        <activity android:name=".SingUp"></activity>
     </application>
 
 </manifest>
