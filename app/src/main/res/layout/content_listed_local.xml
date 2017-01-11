@@ -9,41 +9,30 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.julisarrelli.mcdonaldstest.ListedForms"
+    tools:context="com.example.julisarrelli.mcdonaldstest.ListedLocals"
     tools:showIn="@layout/activity_listed_forms">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Seleccione el formulario que desea completar:"
+        android:text="Seleccione el local a evaluar"
         android:id="@+id/Explanation"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:textSize="25dp"
-        android:textColor="@color/textColor1"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/LocalToEvaluate"
-        android:textStyle="italic"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:textColor="@color/textColor1"
-        android:layout_below="@+id/Explanation"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        />
 
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_below="@+id/Explanation"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/fondoDeList"/>
 
 
 </RelativeLayout>

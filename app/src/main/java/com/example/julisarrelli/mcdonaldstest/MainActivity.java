@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity
 
 
 
+        //instanciamos la plataforma en donde vamos a guardar las cosas extraidas de la base de datos
+        Platform platform=Platform.getInstance();
 
 
         //se instancia el navigation Drawer
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity
         final Button button = (Button) findViewById(R.id.Start);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ListedForms.class);
+                Intent intent = new Intent(v.getContext(), ListedLocals.class);
                 startActivityForResult(intent, 0);
             }
         });
@@ -107,6 +111,9 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.complete) {
+
+            Intent intent = new Intent(MainActivity.this, ListedLocals.class);
+            startActivityForResult(intent, 0);
 
         } else if (id == R.id.account) {
 

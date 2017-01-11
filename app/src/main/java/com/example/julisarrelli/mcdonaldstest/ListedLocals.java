@@ -1,52 +1,57 @@
+
 package com.example.julisarrelli.mcdonaldstest;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
+        import android.app.ProgressDialog;
+        import android.content.Intent;
+        import android.os.AsyncTask;
+        import android.os.Bundle;
+        import android.support.design.widget.FloatingActionButton;
+        import android.support.design.widget.Snackbar;
+        import android.support.v7.app.AppCompatActivity;
+        import android.support.v7.widget.Toolbar;
+        import android.util.Log;
+        import android.view.View;
+        import android.widget.AdapterView;
+        import android.widget.ListAdapter;
+        import android.widget.ListView;
+        import android.widget.SimpleAdapter;
 
-import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
+        import com.example.julisarrelli.mcdonaldstest.JavaClases.Local;
+        import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+        import org.apache.http.NameValuePair;
+        import org.json.JSONArray;
+        import org.json.JSONException;
+        import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.HashMap;
+        import java.util.List;
 
-import static com.example.julisarrelli.mcdonaldstest.R.id.listView;
+        import static com.example.julisarrelli.mcdonaldstest.R.id.listView;
 
-public class ListedForms extends AppCompatActivity {
+public class ListedLocals extends AppCompatActivity {
 
-    Platform platform=Platform.getInstance();
 
     // Progress Dialog
     private ProgressDialog pDialog;
 
     // Creating JSON Parser object
     JSONParser jParser = new JSONParser();
+    Platform platform=Platform.getInstance();
 
     ArrayList<HashMap<String, String>> usersList;
 
 
     // url to get all products list
-    private static String url_getallforms = "http://julisarrellidb.hol.es/mcconnect/getallforms.php";
+    private static String url_getalllocals = "http://julisarrellidb.hol.es/mcconnect/getalllocals.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_PRODUCTS = "forms";
-    private static final String TAG_ID = "idform";
-    private static final String TAG_NAME = "name";
-
+    private static final String TAG_PRODUCTS = "locals";
+    private static final String TAG_ID = "idlocal";
+    private static final String TAG_ADRESS = "adress";
+    private static final String TAG_CITY = "city";
 
 
     // products JSONArray
@@ -58,20 +63,16 @@ public class ListedForms extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listed_forms);
+        setContentView(R.layout.activity_listed_locals);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+
 
         // Hashmap para el ListView
         usersList= new ArrayList<HashMap<String, String>>();
 
-        TextView text=(TextView)findViewById(R.id.LocalToEvaluate);
-        text.setText("El local a evaluar es: "+platform.getLocalAdress());
-
         // Cargar los productos en el Background Thread
-        new LoadAllProducts().execute();
-
-
+        new LoadAllLocals().execute();
 
 
 
@@ -80,7 +81,12 @@ public class ListedForms extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Snackbar.make(parent,"Clickeaste el local "+position, Snackbar.LENGTH_SHORT).show();
+
+                platform.setIdLocalToEvaluate(position);
+                Intent intent = new Intent(ListedLocals.this, ListedForms.class);
+                startActivityForResult(intent, 0);
+
+                //Snackbar.make(parent,"Clickeaste el local"+position, Snackbar.LENGTH_SHORT).show();
 
             }
         });
@@ -88,7 +94,7 @@ public class ListedForms extends AppCompatActivity {
     }
 
 
-    class LoadAllProducts extends AsyncTask<String, String, String> {
+    class LoadAllLocals extends AsyncTask<String, String, String> {
 
         /**
          * Antes de empezar el background thread Show Progress Dialog
@@ -96,8 +102,8 @@ public class ListedForms extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(ListedForms.this);
-            pDialog.setMessage("Cargando usuarios. Por favor espere...");
+            pDialog = new ProgressDialog(ListedLocals.this);
+            pDialog.setMessage("Cargando locales. Por favor espere...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -109,7 +115,7 @@ public class ListedForms extends AppCompatActivity {
             // Building Parameters
             List params = new ArrayList();
             // getting JSON string from URL
-            JSONObject json = jParser.makeHttpRequest(url_getallforms, "GET", params);
+            JSONObject json = jParser.makeHttpRequest(url_getalllocals, "GET", params);
 
             // Check your log cat for JSON reponse
 
@@ -129,7 +135,8 @@ public class ListedForms extends AppCompatActivity {
 
                         // Storing each json item in variable
                         String id = c.getString(TAG_ID);
-                        String name = c.getString(TAG_NAME);
+                        String adress = c.getString(TAG_ADRESS);
+                        String city = c.getString(TAG_CITY);
 
 
                         // creating new HashMap
@@ -137,7 +144,11 @@ public class ListedForms extends AppCompatActivity {
 
                         // adding each child node to HashMap key => value
                         map.put(TAG_ID, id);
-                        map.put(TAG_NAME, name);
+                        map.put(TAG_ADRESS, adress);
+                        map.put(TAG_CITY, city);
+
+                        Local local=new Local(Integer.parseInt(id),adress,city);
+                        platform.addLocal(local);
 
 
                         usersList.add(map);
@@ -164,16 +175,19 @@ public class ListedForms extends AppCompatActivity {
                      * Updating parsed JSON data into ListView
                      * */
                     ListAdapter adapter = new SimpleAdapter(
-                            ListedForms.this,
+                            ListedLocals.this,
                             usersList,
-                            R.layout.formspost,
+                            R.layout.localspost,
                             new String[] {
                                     TAG_ID,
-                                    TAG_NAME,
+                                    TAG_ADRESS,
+                                    TAG_CITY,
+
                             },
                             new int[] {
-                                    R.id.id,
-                                    R.id.name,
+                                    R.id.idLocal,
+                                    R.id.adress,
+                                    R.id.city,
 
                             });
                     // updating listview
@@ -184,4 +198,4 @@ public class ListedForms extends AppCompatActivity {
         }
     }
 
-    }
+}
