@@ -1,15 +1,19 @@
 package com.example.julisarrelli.mcdonaldstest.JavaClases;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Created by julisarrelli on 1/10/17.
  */
 public class Platform {
 
-   public static HashMap<Integer,Form>forms;
-   public static HashMap<Integer,Local>locals;
-   public static int idLocalToEvaluate ;
+    public static HashMap<Integer,Form>forms;
+    public static HashMap<Integer,Local>locals;
+    public static HashMap<Integer,User>users;
+    public static int idLocalToEvaluate ;
     public static int idFormToComplete;
 
 
@@ -20,6 +24,7 @@ public class Platform {
             instance = new Platform();
             forms=new HashMap<Integer, Form>();
             locals=new HashMap<Integer, Local>();
+            users=new HashMap<Integer, User>();
 
         }
 
@@ -34,6 +39,10 @@ public class Platform {
     public void addForm(Form form)
     {
         forms.put(form.getIdForm(),form);
+    }
+    public void addUser(int idUser,User user)
+    {
+        users.put(idUser,user);
     }
 
     public static int getIdFormToComplete() {
@@ -56,4 +65,21 @@ public class Platform {
     public String getLocalAdress(){
         return locals.get(idLocalToEvaluate).getAdress();
     }
+
+    public boolean ValidateUser(User user){
+
+        Set<Integer> keys=users.keySet();
+
+        for(Integer key:keys)
+        {
+            if((users.get(key).getUsername().equals(user.getUsername())&&(users.get(key).getPass().equals(user.getPass()))))
+            {
+                return true;
+            }
+
+        }
+
+        return false;
+
+ }
 }

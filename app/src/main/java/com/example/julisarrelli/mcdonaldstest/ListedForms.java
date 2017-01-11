@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 
 import org.json.JSONArray;
@@ -57,6 +58,8 @@ public class ListedForms extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listed_forms);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

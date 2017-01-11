@@ -1,4 +1,4 @@
-package com.example.julisarrelli.mcdonaldstest;
+package com.example.julisarrelli.mcdonaldstest.JavaClases;
 
 import android.util.Log;
 

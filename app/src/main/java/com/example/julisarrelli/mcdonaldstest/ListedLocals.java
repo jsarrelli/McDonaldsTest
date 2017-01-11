@@ -5,21 +5,18 @@ package com.example.julisarrelli.mcdonaldstest;
         import android.content.Intent;
         import android.os.AsyncTask;
         import android.os.Bundle;
-        import android.support.design.widget.FloatingActionButton;
-        import android.support.design.widget.Snackbar;
         import android.support.v7.app.AppCompatActivity;
         import android.support.v7.widget.Toolbar;
-        import android.util.Log;
         import android.view.View;
         import android.widget.AdapterView;
         import android.widget.ListAdapter;
         import android.widget.ListView;
         import android.widget.SimpleAdapter;
 
+        import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
         import com.example.julisarrelli.mcdonaldstest.JavaClases.Local;
         import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 
-        import org.apache.http.NameValuePair;
         import org.json.JSONArray;
         import org.json.JSONException;
         import org.json.JSONObject;
