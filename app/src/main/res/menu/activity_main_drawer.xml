@@ -25,7 +25,11 @@
                 android:id="@+id/EditForms"
                 android:icon="@mipmap/edit"
                 android:title="Editar Formularios" />
-        </menu>
+            <item
+                android:id="@+id/EditLocals"
+                android:icon="@mipmap/shop"
+                android:title="Locales" />
+</menu>
     </item>
 
 </menu>

@@ -26,7 +26,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ListedLocals" />
         <activity android:name=".Login" />
-        <activity android:name=".SingUp"></activity>
+        <activity android:name=".SingUp" />
+        <activity
+            android:name=".EditLocals"
+            android:label="@string/title_activity_edit_locals"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        //instanciamos la plataforma en donde vamos a guardar las cosas extraidas de la base de datos
 
         if(platform.isUservalidated()) {
             if (platform.loggedUser.getType().equals("classic")) {
@@ -144,7 +143,7 @@ public class MainActivity extends AppCompatActivity
 
 
                 new AlertDialog.Builder(this)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setIcon(R.mipmap.mcdonalds)
                         .setTitle("Mi cuenta")
                         .setMessage("Usuario actual: "+platform.getLoggedUser().getUsername())
                         .setPositiveButton("Aceptar",null)
@@ -165,6 +164,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.AnsweredForms) {
 
         } else if (id == R.id.EditForms) {
+
+
+
+        }
+        else if (id == R.id.EditLocals) {
+
+            Intent intent = new Intent(MainActivity.this, EditLocals.class);
+            startActivityForResult(intent, 0);
 
         }
 
