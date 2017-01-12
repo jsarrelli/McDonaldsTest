@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.julisarrelli.mcdonaldstest.EditLocals"
-    tools:showIn="@layout/activity_listed_forms"
+    tools:showIn="@layout/activity_edit_locals"
     >
 
     <TextView
@@ -44,6 +44,21 @@
         android:layout_alignParentEnd="false"
         android:layout_marginTop="60dp"
         android:backgroundTint="@color/fondoDeList"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/walk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+
+        android:src="@mipmap/add"
+
+        android:clickable="true"
+        android:layout_marginBottom="480dp"
+        app:backgroundTint="@color/colorPrimaryDark"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 
