@@ -5,8 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
@@ -14,6 +16,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
+import com.example.julisarrelli.mcdonaldstest.JavaClases.ListViewAdapter;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Local;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 
@@ -50,6 +53,9 @@ public class EditLocals extends AppCompatActivity {
     private static final String TAG_ADRESS = "adress";
     private static final String TAG_CITY = "city";
 
+    private ArrayList<String > cities;
+    private ArrayList<String> adresses;
+    ListViewAdapter adapter;
 
     // products JSONArray
     JSONArray products = null;
@@ -62,19 +68,20 @@ public class EditLocals extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_locals);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        list = (ListView) findViewById(listView);
+
+        adresses=new ArrayList<String>();
+        cities=new ArrayList<String>();
 
 
-
-        // Hashmap para el ListView
-        usersList= new ArrayList<HashMap<String, String>>();
-
-        // Cargar los productos en el Background Thread
+    // Cargar los productos en el Background Thread
         new LoadAllLocals().execute();
 
 
 
 
-        list = (ListView) findViewById(listView);
+
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -104,7 +111,7 @@ public class EditLocals extends AppCompatActivity {
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
-        }
+            }
         /**
          * obteniendo todos los productos
          * */
@@ -144,11 +151,15 @@ public class EditLocals extends AppCompatActivity {
                         map.put(TAG_ADRESS, adress);
                         map.put(TAG_CITY, city);
 
+                        adresses.add(adress);
+                        cities.add(city);
+
+
                         Local local=new Local(Integer.parseInt(id),adress,city);
                         platform.addLocal(local);
 
 
-                        usersList.add(map);
+
                     }
                 }
             } catch (JSONException e) {
@@ -157,42 +168,22 @@ public class EditLocals extends AppCompatActivity {
             return null;
         }
 
-
-
-        /**
-         * After completing background task Dismiss the progress dialog
-         * **/
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
-            // updating UI from Background Thread
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    /**
-                     * Updating parsed JSON data into ListView
-                     * */
-                    ListAdapter adapter = new SimpleAdapter(
-                            EditLocals.this,
-                            usersList,
-                            R.layout.localspost,
-                            new String[] {
-                                    TAG_ID,
-                                    TAG_ADRESS,
-                                    TAG_CITY,
-
-                            },
-                            new int[] {
-                                    R.id.idLocal,
-                                    R.id.adress,
-                                    R.id.city,
-
-                            });
-                    // updating listview
-                    //setListAdapter(adapter);
-                    list.setAdapter(adapter);
-                }
-            });
+            //cargamos la lista una vez cargado el vector con la info
+            //que vamos a mandar al listAdapter
+          cargarLista();
         }
+
+    }
+
+    private void cargarLista() {
+
+        adapter=new ListViewAdapter(this,adresses,cities);
+        list.setAdapter(adapter);
+
+
     }
 
 }

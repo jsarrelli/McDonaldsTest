@@ -14,6 +14,7 @@ package com.example.julisarrelli.mcdonaldstest;
         import android.widget.SimpleAdapter;
 
         import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
+        import com.example.julisarrelli.mcdonaldstest.JavaClases.ListViewAdapter;
         import com.example.julisarrelli.mcdonaldstest.JavaClases.Local;
         import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 
@@ -50,6 +51,10 @@ public class ListedLocals extends AppCompatActivity {
     private static final String TAG_ADRESS = "adress";
     private static final String TAG_CITY = "city";
 
+    private ArrayList<String >adresses;
+    private ArrayList<String> cities;
+    private ListViewAdapter adapter;
+
 
     // products JSONArray
     JSONArray products = null;
@@ -63,10 +68,10 @@ public class ListedLocals extends AppCompatActivity {
         setContentView(R.layout.activity_listed_locals);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        list = (ListView) findViewById(listView);
 
-
-        // Hashmap para el ListView
-        usersList= new ArrayList<HashMap<String, String>>();
+        adresses=new ArrayList<String>();
+        cities=new ArrayList<String>();
 
         // Cargar los productos en el Background Thread
         new LoadAllLocals().execute();
@@ -74,7 +79,6 @@ public class ListedLocals extends AppCompatActivity {
 
 
 
-        list = (ListView) findViewById(listView);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -136,19 +140,17 @@ public class ListedLocals extends AppCompatActivity {
                         String city = c.getString(TAG_CITY);
 
 
-                        // creating new HashMap
-                        HashMap map = new HashMap();
 
-                        // adding each child node to HashMap key => value
-                        map.put(TAG_ID, id);
-                        map.put(TAG_ADRESS, adress);
-                        map.put(TAG_CITY, city);
-
+                        //cargamos el hashmap de la plataforma
                         Local local=new Local(Integer.parseInt(id),adress,city);
                         platform.addLocal(local);
 
+                        //cargamos el vector para la list view
+                        adresses.add(adress);
+                        cities.add(city);
 
-                        usersList.add(map);
+
+
                     }
                 }
             } catch (JSONException e) {
@@ -166,33 +168,17 @@ public class ListedLocals extends AppCompatActivity {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
             // updating UI from Background Thread
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    /**
-                     * Updating parsed JSON data into ListView
-                     * */
-                    ListAdapter adapter = new SimpleAdapter(
-                            ListedLocals.this,
-                            usersList,
-                            R.layout.localspost,
-                            new String[] {
-                                    TAG_ID,
-                                    TAG_ADRESS,
-                                    TAG_CITY,
-
-                            },
-                            new int[] {
-                                    R.id.idLocal,
-                                    R.id.adress,
-                                    R.id.city,
-
-                            });
-                    // updating listview
-                    //setListAdapter(adapter);
-                    list.setAdapter(adapter);
-                }
-            });
+            cargarLista();
         }
+
+    }
+
+    private void cargarLista() {
+
+        adapter=new ListViewAdapter(this,adresses,cities);
+        list.setAdapter(adapter);
+
+
     }
 
 }
