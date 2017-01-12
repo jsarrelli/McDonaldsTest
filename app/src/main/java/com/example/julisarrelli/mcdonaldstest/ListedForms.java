@@ -8,12 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.example.julisarrelli.mcdonaldstest.JavaClases.FormsListViewAdapter;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
+import com.example.julisarrelli.mcdonaldstest.JavaClases.LocalsListViewAdapter;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 
 import org.json.JSONArray;
@@ -47,6 +47,9 @@ public class ListedForms extends AppCompatActivity {
     private static final String TAG_PRODUCTS = "forms";
     private static final String TAG_ID = "idform";
     private static final String TAG_NAME = "name";
+    private ArrayList<String>names;
+    private FormsListViewAdapter adapter;
+
 
 
 
@@ -72,6 +75,12 @@ public class ListedForms extends AppCompatActivity {
         text.setText("El local a evaluar es: "+platform.getLocalAdress());
 
         // Cargar los productos en el Background Thread
+
+
+        list = (ListView) findViewById(listView);
+
+        names=new ArrayList<String>();
+
         new LoadAllProducts().execute();
 
 
@@ -135,15 +144,10 @@ public class ListedForms extends AppCompatActivity {
                         String name = c.getString(TAG_NAME);
 
 
-                        // creating new HashMap
-                        HashMap map = new HashMap();
-
-                        // adding each child node to HashMap key => value
-                        map.put(TAG_ID, id);
-                        map.put(TAG_NAME, name);
 
 
-                        usersList.add(map);
+                       names.add(name);
+
                     }
                 }
             } catch (JSONException e) {
@@ -161,30 +165,16 @@ public class ListedForms extends AppCompatActivity {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
             // updating UI from Background Thread
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    /**
-                     * Updating parsed JSON data into ListView
-                     * */
-                    ListAdapter adapter = new SimpleAdapter(
-                            ListedForms.this,
-                            usersList,
-                            R.layout.formspost,
-                            new String[] {
-                                    TAG_ID,
-                                    TAG_NAME,
-                            },
-                            new int[] {
-                                    R.id.id,
-                                    R.id.name,
+          cargarLista();
 
-                            });
-                    // updating listview
-                    //setListAdapter(adapter);
-                    list.setAdapter(adapter);
-                }
-            });
         }
+    }
+    private void cargarLista() {
+
+        adapter=new FormsListViewAdapter(this,names);
+        list.setAdapter(adapter);
+
+
     }
 
     }

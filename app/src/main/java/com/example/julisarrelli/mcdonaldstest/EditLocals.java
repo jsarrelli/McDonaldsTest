@@ -2,21 +2,16 @@
 package com.example.julisarrelli.mcdonaldstest;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
-import com.example.julisarrelli.mcdonaldstest.JavaClases.ListViewAdapter;
+import com.example.julisarrelli.mcdonaldstest.JavaClases.LocalsListViewAdapter;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Local;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 
@@ -55,7 +50,7 @@ public class EditLocals extends AppCompatActivity {
 
     private ArrayList<String > cities;
     private ArrayList<String> adresses;
-    ListViewAdapter adapter;
+    LocalsListViewAdapter adapter;
 
     // products JSONArray
     JSONArray products = null;
@@ -142,15 +137,6 @@ public class EditLocals extends AppCompatActivity {
                         String adress = c.getString(TAG_ADRESS);
                         String city = c.getString(TAG_CITY);
 
-
-                        // creating new HashMap
-                        HashMap map = new HashMap();
-
-                        // adding each child node to HashMap key => value
-                        map.put(TAG_ID, id);
-                        map.put(TAG_ADRESS, adress);
-                        map.put(TAG_CITY, city);
-
                         adresses.add(adress);
                         cities.add(city);
 
@@ -180,7 +166,7 @@ public class EditLocals extends AppCompatActivity {
 
     private void cargarLista() {
 
-        adapter=new ListViewAdapter(this,adresses,cities);
+        adapter=new LocalsListViewAdapter(this,adresses,cities);
         list.setAdapter(adapter);
 
 

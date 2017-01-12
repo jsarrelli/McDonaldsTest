@@ -9,12 +9,10 @@ package com.example.julisarrelli.mcdonaldstest;
         import android.support.v7.widget.Toolbar;
         import android.view.View;
         import android.widget.AdapterView;
-        import android.widget.ListAdapter;
         import android.widget.ListView;
-        import android.widget.SimpleAdapter;
 
         import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
-        import com.example.julisarrelli.mcdonaldstest.JavaClases.ListViewAdapter;
+        import com.example.julisarrelli.mcdonaldstest.JavaClases.LocalsListViewAdapter;
         import com.example.julisarrelli.mcdonaldstest.JavaClases.Local;
         import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 
@@ -53,7 +51,7 @@ public class ListedLocals extends AppCompatActivity {
 
     private ArrayList<String >adresses;
     private ArrayList<String> cities;
-    private ListViewAdapter adapter;
+    private LocalsListViewAdapter adapter;
 
 
     // products JSONArray
@@ -175,7 +173,7 @@ public class ListedLocals extends AppCompatActivity {
 
     private void cargarLista() {
 
-        adapter=new ListViewAdapter(this,adresses,cities);
+        adapter=new LocalsListViewAdapter(this,adresses,cities);
         list.setAdapter(adapter);
 
 
