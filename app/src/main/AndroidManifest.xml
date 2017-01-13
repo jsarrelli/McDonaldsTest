@@ -6,7 +6,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/mcdonalds"
+        android:icon="@drawable/mcdonalds"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -30,15 +30,13 @@
         <activity
             android:name=".EditLocals"
             android:label="@string/title_activity_edit_locals"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT.ACTIVTY"
-                android:value=".MainActivity"
-                />
-
-
+                android:value=".MainActivity" />
         </activity>
+        <activity android:name=".NewLocal"></activity>
     </application>
 
 </manifest>

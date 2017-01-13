@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity
                 startActivityForResult(intent, 0);
             }
         });
+
+
     }
 
     private void hideItems() {
@@ -143,7 +145,7 @@ public class MainActivity extends AppCompatActivity
 
 
                 new AlertDialog.Builder(this)
-                        .setIcon(R.mipmap.mcdonalds)
+                        .setIcon(R.drawable.mcdonalds)
                         .setTitle("Mi cuenta")
                         .setMessage("Usuario actual: "+platform.getLoggedUser().getUsername())
                         .setPositiveButton("Aceptar",null)

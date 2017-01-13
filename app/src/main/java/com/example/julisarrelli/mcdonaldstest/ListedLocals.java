@@ -12,7 +12,7 @@ package com.example.julisarrelli.mcdonaldstest;
         import android.widget.ListView;
 
         import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
-        import com.example.julisarrelli.mcdonaldstest.JavaClases.LocalsListViewAdapter;
+        import com.example.julisarrelli.mcdonaldstest.JavaClases.Adapters.LocalsListViewAdapter;
         import com.example.julisarrelli.mcdonaldstest.JavaClases.Local;
         import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 

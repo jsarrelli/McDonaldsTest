@@ -11,9 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.julisarrelli.mcdonaldstest.JavaClases.FormsListViewAdapter;
+import com.example.julisarrelli.mcdonaldstest.JavaClases.Adapters.FormsListViewAdapter;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
-import com.example.julisarrelli.mcdonaldstest.JavaClases.LocalsListViewAdapter;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 
 import org.json.JSONArray;
@@ -72,7 +71,7 @@ public class ListedForms extends AppCompatActivity {
         usersList= new ArrayList<HashMap<String, String>>();
 
         TextView text=(TextView)findViewById(R.id.LocalToEvaluate);
-        text.setText("El local a evaluar es: "+platform.getLocalAdress());
+        text.setText("El local a evaluar es: "+platform.getLocalToEvaluateAdress());
 
         // Cargar los productos en el Background Thread
 
@@ -109,7 +108,7 @@ public class ListedForms extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(ListedForms.this);
-            pDialog.setMessage("Cargando usuarios. Por favor espere...");
+            pDialog.setMessage("Cargando formularios. Por favor espere...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();

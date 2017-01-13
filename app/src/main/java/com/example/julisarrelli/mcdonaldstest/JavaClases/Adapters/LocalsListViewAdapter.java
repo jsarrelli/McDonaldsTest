@@ -1,4 +1,4 @@
-package com.example.julisarrelli.mcdonaldstest.JavaClases;
+package com.example.julisarrelli.mcdonaldstest.JavaClases.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

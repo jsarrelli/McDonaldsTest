@@ -1,5 +1,7 @@
 package com.example.julisarrelli.mcdonaldstest.JavaClases;
 
+import android.util.Log;
+
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,8 +68,12 @@ public class Platform {
         Platform.idLocalToEvaluate = idLocalToEvaluate;
     }
 
-    public String getLocalAdress(){
+    public String getLocalToEvaluateAdress(){
         return locals.get(idLocalToEvaluate).getAdress();
+    }
+
+    public String getLocalAdress(int idLocal){
+        return locals.get(idLocal).getAdress();
     }
 
     public static void setUservalidated(boolean uservalidated) {
@@ -126,8 +132,30 @@ public class Platform {
 
     public int lastUserId()
     {
-        return users.size()-1;
+        return users.size();
+    }
+    public int lastLocalId()
+    {
+        return locals.size();
     }
 
 
+    public boolean checkLocalExist(String adress,String city)
+    {
+        Set<Integer> keys=locals.keySet();
+
+        for (Integer key:keys)
+        {
+            if((locals.get(key).getAdress().equals(adress))&&(locals.get(key).getCity().equals(city)))
+            {
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void deleteLocal(int idLocal) {
+        locals.remove(idLocal);
+    }
 }

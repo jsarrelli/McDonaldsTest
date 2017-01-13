@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Locales:"
-        android:id="@+id/Explanation"
+        android:id="@+id/Title"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
@@ -32,7 +32,7 @@
         android:textStyle="italic"
         android:textSize="15dp"
         android:textColor="@color/textColor1"
-        android:layout_below="@+id/Explanation"
+        android:layout_below="@+id/Title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
