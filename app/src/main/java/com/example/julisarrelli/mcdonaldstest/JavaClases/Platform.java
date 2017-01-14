@@ -1,10 +1,18 @@
 package com.example.julisarrelli.mcdonaldstest.JavaClases;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.julisarrelli.mcdonaldstest.ListedLocals;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,6 +28,9 @@ public class Platform {
     public static boolean uservalidated;
     public static User loggedUser;
 
+    public static Database db;
+
+
 
     public static Platform instance=null;
 
@@ -31,6 +42,7 @@ public class Platform {
             users=new HashMap<Integer, User>();
             uservalidated=false;
             loggedUser=null;
+            db=Database.getInstance();
 
         }
 
@@ -179,11 +191,47 @@ public class Platform {
 
     public int lastUserId()
     {
-        return users.size();
+        Set<Integer> keys=users.keySet();
+
+        int max=0;
+        for (Integer key:keys)
+        {
+            if(key>max)
+            {
+                max=key;
+            }
+        }
+        return max;
     }
     public int lastLocalId()
     {
-        return locals.size();
+        Set<Integer> keys=locals.keySet();
+
+        int max=0;
+        for (Integer key:keys)
+        {
+          if(key>max)
+          {
+              max=key;
+          }
+        }
+        return max;
+
+    }
+
+    public int lastFormId()
+    {
+        Set<Integer> keys=forms.keySet();
+
+        int max=0;
+        for (Integer key:keys)
+        {
+            if(key>max)
+            {
+                max=key;
+            }
+        }
+        return max+1;
     }
 
 
@@ -202,6 +250,21 @@ public class Platform {
         return false;
     }
 
+    public boolean checkFormExist(String name)
+    {
+        Set<Integer> keys=forms.keySet();
+
+        for (Integer key:keys)
+        {
+            if(forms.get(key).getName().equals(name))
+            {
+
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void deleteLocal(int idLocal) {
         locals.remove(idLocal);
     }
@@ -210,4 +273,11 @@ public class Platform {
         forms.remove(idForm);
 
     }
+
+    public void UpdateForms()
+    {
+        db.UpdateForms();
+    }
+
+
 }

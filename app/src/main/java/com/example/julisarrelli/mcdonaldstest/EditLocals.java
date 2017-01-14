@@ -97,9 +97,24 @@ public class EditLocals extends AppCompatActivity {
 
 
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//
+//                HashMap<String,String> selectedItem = (HashMap<String, String>) parent.getItemAtPosition(position);
+//                String selectedLocal_Adress=selectedItem.get("adress");
+//                String selectedLocal_City=selectedItem.get("city");
+//                deleteLocal(platform.getLocalId(selectedLocal_Adress,selectedLocal_City));
+//
+//            }
+//        });
+
+        list.setLongClickable(true);
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           int position, long id) {
 
 
                 HashMap<String,String> selectedItem = (HashMap<String, String>) parent.getItemAtPosition(position);
@@ -107,8 +122,10 @@ public class EditLocals extends AppCompatActivity {
                 String selectedLocal_City=selectedItem.get("city");
                 deleteLocal(platform.getLocalId(selectedLocal_Adress,selectedLocal_City));
 
-            }
-        });
+
+                return false;
+            }});
+
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addLocal);

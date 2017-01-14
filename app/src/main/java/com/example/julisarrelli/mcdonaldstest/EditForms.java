@@ -95,16 +95,28 @@ public class EditForms extends AppCompatActivity {
         // Cargar los productos en el Background Thread
         new LoadAllForms().execute();
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//
+//
+//            }
+//        });
+
+
+        list.setLongClickable(true);
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           int position, long id) {
 
                 Form form=(Form)parent.getItemAtPosition(position);
+
                 deleteForm(form.getIdForm());
 
-            }
-        });
-
+                return false;
+            }});
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addForm);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -122,23 +134,78 @@ public class EditForms extends AppCompatActivity {
 
     }
 
-    private void deleteForm(final int position) {
+
+
+    private void deleteForm(final int idForm) {
 
 
             new AlertDialog.Builder(this)
                     .setIcon(R.drawable.forms)
                     .setTitle("Eliminar Formulario")
-                    .setMessage("Desea eliminar este formulario? "+platform.getFormName(position))
+                    .setMessage("Desea eliminar este formulario? "+platform.getFormName(idForm))
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener()
                     {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            deleteFormFromDatabase(position);
+                            deleteQuestionsFromDatabase(idForm);
+                            deleteFormFromDatabase(idForm);
+
+                            platform.deleteForm(idForm);
+                            Toast.makeText(EditForms.this,"Formuluario eliminado",Toast.LENGTH_LONG);
+                            Intent intent=new Intent(EditForms.this,EditForms.class);
+                            startActivityForResult(intent, 0);
+                            finish();
                         }
 
                     })
                     .setNegativeButton("Cancelar", null)
                     .show();
+
+
+    }
+
+    private void deleteQuestionsFromDatabase(final int idForm) {
+
+        class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected String doInBackground(String... params) {
+                String paramposition = params[0];
+
+
+
+
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                nameValuePairs.add(new BasicNameValuePair("idForm", String.valueOf(idForm)));
+
+
+                try {
+                    HttpClient httpClient = new DefaultHttpClient();
+                    HttpPost httpPost = new HttpPost(
+                            "http://julisarrellidb.hol.es/mcconnect/deletequestion.php");
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                    HttpResponse response = httpClient.execute(httpPost);
+
+                    HttpEntity entity = response.getEntity();
+
+
+                } catch (ClientProtocolException e) {
+
+
+                } catch (IOException e) {
+
+                }
+                return "success";
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+
+            }
+        }
+        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+        sendPostReqAsyncTask.execute(String.valueOf(idForm));
 
 
     }
@@ -153,7 +220,7 @@ public class EditForms extends AppCompatActivity {
 
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                nameValuePairs.add(new BasicNameValuePair("idLocal", String.valueOf(idForm)));
+                nameValuePairs.add(new BasicNameValuePair("idForm", String.valueOf(idForm)));
 
 
                 try {
@@ -181,11 +248,7 @@ public class EditForms extends AppCompatActivity {
                 super.onPostExecute(result);
 
 
-                platform.deleteForm(idForm);
-                Toast.makeText(EditForms.this,"Formuluario eliminado",Toast.LENGTH_LONG);
-                Intent intent=new Intent(EditForms.this,EditForms.class);
-                startActivityForResult(intent, 0);
-                finish();
+
 
 
             }
