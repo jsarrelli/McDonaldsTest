@@ -40,7 +40,8 @@
         <activity
             android:name=".EditForms"
             android:label="@string/title_activity_edit_forms"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".NewForm"></activity>
     </application>
 
 </manifest>

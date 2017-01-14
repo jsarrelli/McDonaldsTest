@@ -113,7 +113,7 @@ public class EditForms extends AppCompatActivity {
 
 
 
-                Intent intent= new Intent(EditForms.this,NewLocal.class);
+                Intent intent= new Intent(EditForms.this,NewForm.class);
                 startActivityForResult(intent, 0);
                 finish();
 
