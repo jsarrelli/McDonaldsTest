@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
         if(platform.isUservalidated()) {
             if (platform.loggedUser.getType().equals("classic")) {
                 hideItems();
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        final Button button = (Button) findViewById(R.id.Start);
+        final Button button = (Button) findViewById(R.id.Start1);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ListedLocals.class);
@@ -166,6 +167,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.AnsweredForms) {
 
         } else if (id == R.id.EditForms) {
+
+            Intent intent=new Intent(MainActivity.this,EditForms.class);
+            startActivityForResult(intent,0);
+
 
 
 

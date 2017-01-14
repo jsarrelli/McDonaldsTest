@@ -111,4 +111,5 @@
         completions."
     </string>
     <string name="title_activity_edit_locals">EditLocals</string>
+    <string name="title_activity_edit_forms">EditForms</string>
 </resources>

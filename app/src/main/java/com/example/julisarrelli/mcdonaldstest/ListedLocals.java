@@ -7,9 +7,11 @@ package com.example.julisarrelli.mcdonaldstest;
         import android.os.Bundle;
         import android.support.v7.app.AppCompatActivity;
         import android.support.v7.widget.Toolbar;
+        import android.util.Log;
         import android.view.View;
         import android.widget.AdapterView;
         import android.widget.ListView;
+        import android.widget.Toast;
 
         import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
         import com.example.julisarrelli.mcdonaldstest.JavaClases.Adapters.LocalsListViewAdapter;
@@ -73,6 +75,7 @@ public class ListedLocals extends AppCompatActivity {
 
         // Cargar los productos en el Background Thread
         new LoadAllLocals().execute();
+        Log.v("locales","puto");
 
 
 
@@ -81,9 +84,15 @@ public class ListedLocals extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                platform.setIdLocalToEvaluate(position);
+
                 Intent intent = new Intent(ListedLocals.this, ListedForms.class);
                 startActivityForResult(intent, 0);
+                HashMap<String,String> selectedItem = (HashMap<String, String>) parent.getItemAtPosition(position);
+                String selectedLocal_Adress=selectedItem.get("adress");
+                String selectedLocal_City=selectedItem.get("city");
+                platform.setIdLocalToEvaluate(platform.getLocalId(selectedLocal_Adress,selectedLocal_City));
+
+                //Toast.makeText(getApplicationContext(), String.valueOf(platform.getLocalId(selectedLocal_Adress,selectedLocal_City)),Toast.LENGTH_LONG).show();
 
                 //Snackbar.make(parent,"Clickeaste el local"+position, Snackbar.LENGTH_SHORT).show();
 

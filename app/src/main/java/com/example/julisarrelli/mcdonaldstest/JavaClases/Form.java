@@ -31,4 +31,9 @@ public class Form {
     {
         return questions;
     }
+
+    public void setQuestions(HashMap<Integer,Question>questions)
+    {
+        this.questions=questions;
+    }
 }

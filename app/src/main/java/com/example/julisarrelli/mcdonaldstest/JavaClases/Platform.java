@@ -76,6 +76,53 @@ public class Platform {
         return locals.get(idLocal).getAdress();
     }
 
+    public String getFormName(int idForm){
+
+        return forms.get(idForm).getName();
+    }
+
+    public int getLocalId(String adress,String city)
+    {
+        Set<Integer>keys=locals.keySet();
+
+        for(Integer key:keys)
+        {
+            if(locals.get(key).getAdress().equals(adress)&&locals.get(key).getCity().equals(city))
+            {
+                return key;
+            }
+        }
+        return 0;
+    }
+
+    public int getUserIdByUsername(String Username)
+    {
+        Set<Integer>keys=users.keySet();
+
+        for(Integer key:keys)
+        {
+            if(users.get(key).getUsername().equals(Username))
+            {
+                return key;
+            }
+        }
+        return 0;
+    }
+
+    public Form getFormByName(String name)
+    {
+        Set<Integer>keys=forms.keySet();
+
+        for(Integer key:keys)
+        {
+            if(forms.get(key).getName().equals(name))
+            {
+                return forms.get(key);
+            }
+        }
+        return null;
+    }
+
     public static void setUservalidated(boolean uservalidated) {
         Platform.uservalidated = uservalidated;
     }
@@ -157,5 +204,10 @@ public class Platform {
 
     public void deleteLocal(int idLocal) {
         locals.remove(idLocal);
+    }
+
+    public void deleteForm(int idForm) {
+        forms.remove(idForm);
+
     }
 }

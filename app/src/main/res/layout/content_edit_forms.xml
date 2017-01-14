@@ -9,14 +9,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.julisarrelli.mcdonaldstest.EditLocals"
-    tools:showIn="@layout/activity_edit_locals"
-    >
+    tools:context="com.example.julisarrelli.mcdonaldstest.EditForms"
+    tools:showIn="@layout/activity_edit_forms">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Locales:"
+        android:text="Formularios:"
         android:id="@+id/Title"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -24,29 +23,9 @@
         android:textSize="25dp"
         android:textColor="@color/textColor1"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Haga click en un local si desea eliminarlo"
-        android:id="@+id/explanation"
-        android:textStyle="italic"
-        android:textSize="15dp"
-        android:textColor="@color/textColor1"
-        android:layout_below="@+id/Title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false"
-        android:layout_marginTop="70dp"
-        android:backgroundTint="@color/fondoDeList"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addLocal"
+        android:id="@+id/addForm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
@@ -58,9 +37,30 @@
         app:backgroundTint="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+       />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Haga click en un formulario para emilinarlo"
+        android:id="@+id/LocalToEvaluate"
+        android:textStyle="italic"
+        android:textSize="15dp"
+        android:textColor="@color/textColor1"
+        android:layout_below="@+id/Title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="85dp"
+        android:layout_marginEnd="85dp" />
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="75dp" />
 
 
 </RelativeLayout>

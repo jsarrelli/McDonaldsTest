@@ -8,6 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.julisarrelli.mcdonaldstest.JavaClases.Form;
+import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
+import com.example.julisarrelli.mcdonaldstest.JavaClases.User;
 import com.example.julisarrelli.mcdonaldstest.R;
 
 import java.util.ArrayList;
@@ -21,11 +24,13 @@ public class FormsListViewAdapter extends BaseAdapter {
     //int[] imagenes;
     ArrayList<String> names;
     LayoutInflater inflater;
+    Platform plataform;
 
     public FormsListViewAdapter(Context context, ArrayList<String> names) {
         this.context = context;
         //  this.imagenes = imagenes;
         this.names=names;
+        this.plataform=Platform.getInstance();
 
     }
 
@@ -35,8 +40,8 @@ public class FormsListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public Form getItem(int position) {
+        return plataform.getFormByName(names.get(position));
     }
 
     @Override

@@ -16,6 +16,7 @@
         android:focusable="true"
         android:foregroundTint="#080101">
 
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_listed_local" />

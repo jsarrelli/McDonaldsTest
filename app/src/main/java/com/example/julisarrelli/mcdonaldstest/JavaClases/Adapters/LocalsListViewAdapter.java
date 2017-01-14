@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.julisarrelli.mcdonaldstest.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by julisarrelli on 1/12/17.
@@ -36,8 +37,17 @@ public class LocalsListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public HashMap<String,String> getItem(int position) {
+
+        String adress=adresses.get(position);
+        String city=cities.get(position);
+
+        HashMap<String,String>answer=new HashMap<>();
+        answer.put("adress",adress);
+        answer.put("city",city);
+
+
+        return answer;
     }
 
     @Override

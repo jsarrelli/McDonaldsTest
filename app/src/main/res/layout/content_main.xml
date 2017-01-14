@@ -17,8 +17,7 @@
 
 
     <Button
-        android:id="@+id/Start"
-
+        android:id="@+id/Start1"
         android:text="Realizar Cuestionario"
         android:textColor="#FFFFFF"
         android:textSize="30sp"

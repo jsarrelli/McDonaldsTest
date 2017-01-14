@@ -1,4 +1,6 @@
 
+
+
 package com.example.julisarrelli.mcdonaldstest;
 
 import android.app.ProgressDialog;
@@ -18,6 +20,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.julisarrelli.mcdonaldstest.JavaClases.Adapters.FormsListViewAdapter;
+import com.example.julisarrelli.mcdonaldstest.JavaClases.Form;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Adapters.LocalsListViewAdapter;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Local;
@@ -41,10 +45,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.example.julisarrelli.mcdonaldstest.R.id.EditForms;
 import static com.example.julisarrelli.mcdonaldstest.R.id.EditLocals;
 import static com.example.julisarrelli.mcdonaldstest.R.id.listView;
+import static com.example.julisarrelli.mcdonaldstest.R.id.listView1;
 
-public class EditLocals extends AppCompatActivity {
+public class EditForms extends AppCompatActivity {
 
 
     // Progress Dialog
@@ -54,71 +60,60 @@ public class EditLocals extends AppCompatActivity {
     JSONParser jParser = new JSONParser();
     Platform platform=Platform.getInstance();
 
-    ArrayList<HashMap<String, String>> usersList;
+
 
 
     // url to get all products list
-    private static String url_getalllocals = "http://julisarrellidb.hol.es/mcconnect/getalllocals.php";
+    private static String url_getallforms = "http://julisarrellidb.hol.es/mcconnect/getallforms.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_PRODUCTS = "locals";
-    private static final String TAG_ID = "idlocal";
-    private static final String TAG_ADRESS = "adress";
-    private static final String TAG_CITY = "city";
+    private static final String TAG_PRODUCTS = "forms";
+    private static final String TAG_ID = "idform";
+    private static final String TAG_NAME = "name";
 
-    private ArrayList<String > cities;
-    private ArrayList<String> adresses;
-    LocalsListViewAdapter adapter;
+    private ArrayList<String > names;
+
+    FormsListViewAdapter adapter;
 
     // products JSONArray
     JSONArray products = null;
-
     ListView list;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_locals);
-
-
-        list = (ListView) findViewById(listView);
-
-        adresses=new ArrayList<String>();
-        cities=new ArrayList<String>();
-
-
-    // Cargar los productos en el Background Thread
-        new LoadAllLocals().execute();
+        setContentView(R.layout.activity_edit_forms);
 
 
 
+         list = (ListView) findViewById(listView1);
 
+        names=new ArrayList<String>();
 
+        // Cargar los productos en el Background Thread
+        new LoadAllForms().execute();
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
-                HashMap<String,String> selectedItem = (HashMap<String, String>) parent.getItemAtPosition(position);
-                String selectedLocal_Adress=selectedItem.get("adress");
-                String selectedLocal_City=selectedItem.get("city");
-                deleteLocal(platform.getLocalId(selectedLocal_Adress,selectedLocal_City));
+                Form form=(Form)parent.getItemAtPosition(position);
+                deleteForm(form.getIdForm());
 
             }
         });
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addLocal);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addForm);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
 
-                Intent intent= new Intent(EditLocals.this,NewLocal.class);
+                Intent intent= new Intent(EditForms.this,NewLocal.class);
                 startActivityForResult(intent, 0);
                 finish();
 
@@ -127,18 +122,18 @@ public class EditLocals extends AppCompatActivity {
 
     }
 
-    private void deleteLocal(final int idlocal) {
+    private void deleteForm(final int position) {
 
 
             new AlertDialog.Builder(this)
-                    .setIcon(R.drawable.mcshops)
-                    .setTitle("Eliminar Local")
-                    .setMessage("Desea eliminar este local? "+platform.getLocalAdress(idlocal))
+                    .setIcon(R.drawable.forms)
+                    .setTitle("Eliminar Formulario")
+                    .setMessage("Desea eliminar este formulario? "+platform.getFormName(position))
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener()
                     {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                           deleteLocalFromDatabase(idlocal);
+                            deleteFormFromDatabase(position);
                         }
 
                     })
@@ -148,7 +143,7 @@ public class EditLocals extends AppCompatActivity {
 
     }
 
-    private void deleteLocalFromDatabase(final int idLocal) {
+    private void deleteFormFromDatabase(final int idForm) {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
             protected String doInBackground(String... params) {
@@ -158,14 +153,13 @@ public class EditLocals extends AppCompatActivity {
 
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                nameValuePairs.add(new BasicNameValuePair("idLocal", String.valueOf(idLocal)));
+                nameValuePairs.add(new BasicNameValuePair("idLocal", String.valueOf(idForm)));
 
-                Log.v("locall", String.valueOf(idLocal));
 
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
                     HttpPost httpPost = new HttpPost(
-                            "http://julisarrellidb.hol.es/mcconnect/deletelocal.php");
+                            "http://julisarrellidb.hol.es/mcconnect/deleteform.php");
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                     HttpResponse response = httpClient.execute(httpPost);
@@ -187,9 +181,9 @@ public class EditLocals extends AppCompatActivity {
                 super.onPostExecute(result);
 
 
-                platform.deleteLocal(idLocal);
-                Toast.makeText(EditLocals.this,"Local eliminado",Toast.LENGTH_LONG);
-                Intent intent=new Intent(EditLocals.this,EditLocals.class);
+                platform.deleteForm(idForm);
+                Toast.makeText(EditForms.this,"Formuluario eliminado",Toast.LENGTH_LONG);
+                Intent intent=new Intent(EditForms.this,EditForms.class);
                 startActivityForResult(intent, 0);
                 finish();
 
@@ -197,11 +191,11 @@ public class EditLocals extends AppCompatActivity {
             }
         }
         SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
-        sendPostReqAsyncTask.execute(String.valueOf(idLocal));
+        sendPostReqAsyncTask.execute(String.valueOf(idForm));
     }
 
 
-    class LoadAllLocals extends AsyncTask<String, String, String> {
+    class LoadAllForms extends AsyncTask<String, String, String> {
 
         /**
          * Antes de empezar el background thread Show Progress Dialog
@@ -209,24 +203,27 @@ public class EditLocals extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(EditLocals.this);
-            pDialog.setMessage("Cargando locales. Por favor espere...");
+            pDialog = new ProgressDialog(EditForms.this);
+            pDialog.setMessage("Cargando formularios. Por favor espere...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
-            }
+        }
         /**
          * obteniendo todos los productos
          * */
         protected String doInBackground(String... args) {
+
             // Building Parameters
             List params = new ArrayList();
             // getting JSON string from URL
-            JSONObject json = jParser.makeHttpRequest(url_getalllocals, "GET", params);
+            JSONObject json = jParser.makeHttpRequest(url_getallforms, "GET", params);
 
             // Check your log cat for JSON reponse
 
             try {
+                Log.v("formularios","jeje");
+
                 // Checking for SUCCESS TAG
                 int success = json.getInt(TAG_SUCCESS);
 
@@ -242,15 +239,14 @@ public class EditLocals extends AppCompatActivity {
 
                         // Storing each json item in variable
                         String id = c.getString(TAG_ID);
-                        String adress = c.getString(TAG_ADRESS);
-                        String city = c.getString(TAG_CITY);
+                        String name = c.getString(TAG_NAME);
 
-                        adresses.add(adress);
-                        cities.add(city);
+                        Form form=new Form(Integer.parseInt(id),name,null);
+                        Log.v("formularios",form.getName());
+                        platform.addForm(form);
+                            //falta agregar el addForms en la plataforma
 
-
-                        Local local=new Local(Integer.parseInt(id),adress,city);
-                        platform.addLocal(local);
+                        names.add(name);
 
 
 
@@ -262,22 +258,28 @@ public class EditLocals extends AppCompatActivity {
             return null;
         }
 
+
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
-            //cargamos la lista una vez cargado el vector con la info
-            //que vamos a mandar al listAdapter
-          cargarLista();
-        }
+            // updating UI from Background Thread
+            cargarLista();
 
+        }
     }
 
     private void cargarLista() {
 
-        adapter=new LocalsListViewAdapter(this,adresses,cities);
+        adapter=new FormsListViewAdapter(this,names);
         list.setAdapter(adapter);
 
 
     }
+
+
 
 }

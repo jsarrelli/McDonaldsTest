@@ -36,7 +36,11 @@
                 android:name="android.support.PARENT.ACTIVTY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".NewLocal"></activity>
+        <activity android:name=".NewLocal" />
+        <activity
+            android:name=".EditForms"
+            android:label="@string/title_activity_edit_forms"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
