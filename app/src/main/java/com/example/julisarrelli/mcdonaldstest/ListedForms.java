@@ -1,17 +1,20 @@
 package com.example.julisarrelli.mcdonaldstest;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Adapters.FormsListViewAdapter;
+import com.example.julisarrelli.mcdonaldstest.JavaClases.Form;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.JSONParser;
 import com.example.julisarrelli.mcdonaldstest.JavaClases.Platform;
 
@@ -22,8 +25,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import static com.example.julisarrelli.mcdonaldstest.R.id.listView;
+import static com.example.julisarrelli.mcdonaldstest.R.id.listView2;
 
 public class ListedForms extends AppCompatActivity {
 
@@ -76,7 +81,6 @@ public class ListedForms extends AppCompatActivity {
         // Cargar los productos en el Background Thread
 
 
-        list = (ListView) findViewById(listView);
 
         names=new ArrayList<String>();
 
@@ -87,11 +91,26 @@ public class ListedForms extends AppCompatActivity {
 
 
 
-        list = (ListView) findViewById(listView);
+        list = (ListView) findViewById(listView2);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Snackbar.make(parent,"Clickeaste el local "+position, Snackbar.LENGTH_SHORT).show();
+
+
+                try {
+                    Form form=(Form)parent.getItemAtPosition(position);
+
+                    platform.setIdFormToComplete(form.getIdForm());
+
+                    Intent intent=new Intent(ListedForms.this,ListedQuestions.class);
+                    startActivityForResult(intent,0);
+                }
+                catch (Exception e)
+                {
+                    Log.v("julierror","sigue siendo una garcha");
+                }
+
+
 
             }
         });
@@ -141,6 +160,9 @@ public class ListedForms extends AppCompatActivity {
                         // Storing each json item in variable
                         String id = c.getString(TAG_ID);
                         String name = c.getString(TAG_NAME);
+
+                        Form form=new Form(Integer.parseInt(id),name,null);
+                        platform.addForm(form);
 
 
 

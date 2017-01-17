@@ -285,7 +285,6 @@ public class EditForms extends AppCompatActivity {
             // Check your log cat for JSON reponse
 
             try {
-                Log.v("formularios","jeje");
 
                 // Checking for SUCCESS TAG
                 int success = json.getInt(TAG_SUCCESS);
@@ -305,7 +304,6 @@ public class EditForms extends AppCompatActivity {
                         String name = c.getString(TAG_NAME);
 
                         Form form=new Form(Integer.parseInt(id),name,null);
-                        Log.v("formularios",form.getName());
                         platform.addForm(form);
                             //falta agregar el addForms en la plataforma
 

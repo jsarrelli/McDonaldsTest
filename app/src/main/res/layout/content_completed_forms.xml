@@ -9,13 +9,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.julisarrelli.mcdonaldstest.ListedForms"
-    tools:showIn="@layout/activity_listed_forms">
+    tools:context="com.example.julisarrelli.mcdonaldstest.CompletedForms"
+    tools:showIn="@layout/activity_completed_forms">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Seleccione el formulario que desea completar:"
+        android:text="Formularios completos:"
         android:id="@+id/Title"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -26,8 +26,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/LocalToEvaluate"
+        android:text="Haga click sobre un formulario para verlo o mantenga para eliminarlo"
+        android:id="@+id/explanation1"
         android:textStyle="italic"
         android:textSize="15dp"
         android:textColor="@color/textColor1"
@@ -39,7 +39,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView2"
+        android:id="@+id/listView4"
         android:layout_below="@+id/Title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

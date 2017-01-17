@@ -41,7 +41,10 @@
             android:name=".EditForms"
             android:label="@string/title_activity_edit_forms"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".NewForm"></activity>
+        <activity android:name=".NewForm" />
+        <activity android:name=".ListedQuestions" />
+        <activity android:name=".CompletedForms" />
+        <activity android:name=".ListedAnswers"></activity>
     </application>
 
 </manifest>

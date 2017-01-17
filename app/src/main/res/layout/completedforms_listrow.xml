@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#f0f0f0"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="378dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@drawable/post_border_style"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/box_container"
+            android:layout_width="369dp"
+            android:layout_height="124dp"
+            android:layout_margin="2dp"
+            android:background="@drawable/post_border_background"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/single_post_circuito_linearbox"
+                android:layout_width="373dp"
+                android:layout_height="118dp"
+                android:layout_margin="2dp"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3">
+
+                    <ImageView
+                        android:layout_width="110dp"
+                        android:layout_height="114dp"
+                        android:id="@+id/image"
+                        android:src="@drawable/forms"
+                        android:scaleType="centerCrop" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:orientation="vertical"
+                    android:layout_width="251dp"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Form"
+                        android:id="@+id/list_name"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#ff000000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="User: "
+                        android:id="@+id/user"
+                        android:textColor="#ff868686"
+                        android:layout_below="@+id/list_name"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="User"
+                        android:id="@+id/list_user"
+                        android:textColor="#ff868686"
+                        android:layout_below="@+id/list_name"
+                        android:layout_alignLeft="@+id/list_date"
+                        android:layout_alignStart="@+id/list_date" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Local: "
+                        android:id="@+id/local"
+                        android:textColor="#ff868686"
+                        android:layout_marginTop="11dp"
+                        android:layout_below="@+id/date"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="local"
+                        android:id="@+id/list_local"
+                        android:textColor="#ff868686"
+                        android:layout_alignBaseline="@+id/local"
+                        android:layout_alignBottom="@+id/local"
+                        android:layout_toRightOf="@+id/local"
+                        android:layout_toEndOf="@+id/local" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Date: "
+                        android:id="@+id/date"
+                        android:textColor="#ff868686"
+
+                        android:layout_marginTop="13dp"
+                        android:layout_below="@+id/user"
+                        android:layout_alignRight="@+id/user"
+                        android:layout_alignEnd="@+id/user" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Date"
+                        android:id="@+id/list_date"
+                        android:textColor="#ff868686"
+
+                        android:layout_alignBaseline="@+id/date"
+                        android:layout_alignBottom="@+id/date"
+                        android:layout_toRightOf="@+id/local"
+                        android:layout_toEndOf="@+id/local" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

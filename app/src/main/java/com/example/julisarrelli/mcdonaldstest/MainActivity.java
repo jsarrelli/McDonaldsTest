@@ -166,6 +166,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.AnsweredForms) {
 
+            Intent intent=new Intent(MainActivity.this,CompletedForms.class);
+            startActivityForResult(intent,0);
+
         } else if (id == R.id.EditForms) {
 
             Intent intent=new Intent(MainActivity.this,EditForms.class);

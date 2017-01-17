@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_listed_questions"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.julisarrelli.mcdonaldstest.ListedQuestions"
+    android:background="@android:color/darker_gray">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="200dp"
+        android:background="@color/textColor1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <TextSwitcher
+            android:id="@+id/TextSwitcher_question"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="70dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="75dp"
+            android:background="?android:attr/colorForegroundInverse"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+
+            />
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="41dp"
+            android:layout_x="312dp"
+            android:layout_y="10dp"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:background="@drawable/leftarrow"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+           />
+
+        <ImageButton
+            android:id="@+id/next"
+            android:layout_width="40dp"
+            android:layout_height="41dp"
+            android:layout_x="312dp"
+            android:layout_y="10dp"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:background="@drawable/rightarrow"
+            android:layout_alignTop="@+id/back"
+            android:layout_alignParentRight="true"
+          />
+
+        <Button
+            android:text="Enviar Formulario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:id="@+id/Submit"
+            android:elevation="0dp" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:text="Observaciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        tools:text="Obersvaciones"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:textAllCaps="false"
+        android:textSize="21sp"
+
+        android:layout_above="@+id/Observation"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="14dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/Observation"
+        android:hint="Ingrese aqui sus obeservaciones"
+        tools:layout_height="80dp"
+        android:textSize="18sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="-10dp" />
+
+    <ImageButton
+        android:id="@+id/bad"
+        android:layout_x="312dp"
+        android:layout_y="10dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:background="@drawable/thumbdown"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+
+        android:layout_above="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="18dp" />
+
+    <TextView
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/good"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="23dp"
+        android:id="@+id/textView3"
+        android:textStyle="normal|bold|italic"
+        android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@+id/good"
+        android:layout_x="312dp"
+        android:layout_y="10dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:background="@drawable/thumbup"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+
+        android:layout_alignTop="@+id/bad"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

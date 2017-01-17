@@ -23,10 +23,20 @@ public class Platform {
     public static HashMap<Integer,Form>forms;
     public static HashMap<Integer,Local>locals;
     public static HashMap<Integer,User>users;
+    public static HashMap<Integer,CompletedForm> completedforms;
     public static int idLocalToEvaluate ;
     public static int idFormToComplete;
     public static boolean uservalidated;
     public static User loggedUser;
+    public static CompletedForm formToShow;
+
+    public static CompletedForm getFormToShow() {
+        return formToShow;
+    }
+
+    public static void setFormToShow(CompletedForm formToShow) {
+        Platform.formToShow = formToShow;
+    }
 
     public static Database db;
 
@@ -40,6 +50,7 @@ public class Platform {
             forms=new HashMap<Integer, Form>();
             locals=new HashMap<Integer, Local>();
             users=new HashMap<Integer, User>();
+            completedforms=new HashMap<Integer, CompletedForm>();
             uservalidated=false;
             loggedUser=null;
             db=Database.getInstance();
@@ -79,6 +90,7 @@ public class Platform {
     public static void setIdLocalToEvaluate(int idLocalToEvaluate) {
         Platform.idLocalToEvaluate = idLocalToEvaluate;
     }
+
 
     public String getLocalToEvaluateAdress(){
         return locals.get(idLocalToEvaluate).getAdress();
@@ -278,6 +290,12 @@ public class Platform {
     {
         db.UpdateForms();
     }
+
+    public void addCompletedForms(CompletedForm cp)
+    {
+        completedforms.put(cp.getIdForm(),cp);
+    }
+
 
 
 }
