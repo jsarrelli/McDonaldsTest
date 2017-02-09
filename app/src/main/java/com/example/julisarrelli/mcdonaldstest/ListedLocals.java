@@ -87,6 +87,7 @@ public class ListedLocals extends AppCompatActivity {
 
                 Intent intent = new Intent(ListedLocals.this, ListedForms.class);
                 startActivityForResult(intent, 0);
+
                 HashMap<String,String> selectedItem = (HashMap<String, String>) parent.getItemAtPosition(position);
                 String selectedLocal_Adress=selectedItem.get("adress");
                 String selectedLocal_City=selectedItem.get("city");

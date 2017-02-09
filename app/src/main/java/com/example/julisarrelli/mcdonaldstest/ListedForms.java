@@ -162,6 +162,7 @@ public class ListedForms extends AppCompatActivity {
                         String name = c.getString(TAG_NAME);
 
                         Form form=new Form(Integer.parseInt(id),name,null);
+
                         platform.addForm(form);
 
 

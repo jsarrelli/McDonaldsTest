@@ -3,9 +3,15 @@ package com.example.julisarrelli.mcdonaldstest;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -51,6 +58,7 @@ public class Login extends AppCompatActivity {
     private static final String TAG_USERNAME = "username";
     private static final String TAG_PASS = "pass";
     private static final String TAG_TYPE = "type";
+    private static final String TAG_PHOTO = "photo";
 
 
     // products JSONArray
@@ -144,13 +152,24 @@ public class Login extends AppCompatActivity {
                         String username = c.getString(TAG_USERNAME);
                         String pass = c.getString(TAG_PASS);
                         String type = c.getString(TAG_TYPE);
+                        String image= c.getString(TAG_PHOTO);
+
+
+                        byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+                       // byte[] bytes = ByteBuffer.allocate(Long.SIZE / Byte.SIZE).putLong(image).array();
+
+                        //Bitmap imagebitmap= BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        Drawable drawable = new BitmapDrawable(getResources(), decodedByte);
+
 
                         //obtenemos todos los usuarios en la base y los cargamos en el hashmap,
                         //si la base llegase a tener muchos usuarios esto no es conveniente
                         //ya que le demanda mucho al procesador del telefono
 
-                        User user=new User(username,pass,type);
-                        platform.addUser(Integer.parseInt(id),user);
+                       User user=new User(username,pass,type,drawable);
+                       platform.addUser(Integer.parseInt(id),user);
 
 
 

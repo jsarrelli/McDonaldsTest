@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity
 
 
                 new AlertDialog.Builder(this)
-                        .setIcon(R.drawable.mcdonalds)
+                        .setIcon(platform.getLoggedUser().getPhoto())
                         .setTitle("Mi cuenta")
                         .setMessage("Usuario actual: "+platform.getLoggedUser().getUsername())
                         .setPositiveButton("Aceptar",null)
